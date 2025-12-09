@@ -1,0 +1,21 @@
+Standalone Blast protocol:
+
+wget  ftp://ftp.ncbi.nlm.nih.gov/blast/executables/LATEST/ncbi-blast-2.7.1+-x64-linux.tar.gz
+wget  ftp://ftp.ncbi.nlm.nih.gov/blast/executables/LATEST/ncbi-blast-2.7.1+-x64-linux.tar.gz.md5
+md5sum -c ncbi-blast-2.7.1+-x64-linux.tar.gz.md5
+cd /mnt
+wget  “sample1.faa.gz”
+wget  “sample2.faa.gz”
+gunzip *.gz 
+formatdb -i sample1.fasta -o T -p F
+formatdb -i sample2.fasta -o T -p F
+blastall -i sample1.fasta -d sample2.fasta -p blastn
+blastall -i sample1.fasta -d sample2.fasta -p blastn -o out.txt
+
+
+Reference:
+
+http://ged.msu.edu/angus/tutorials-2011/running-blast.html
+
+Converting macfile to UNIXfile:
+gawk '{ gsub("\r", "\n"); print $0;}' macfile.txt > unixfile.txt
